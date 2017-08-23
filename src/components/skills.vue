@@ -35,39 +35,14 @@
 <script>
 import Config from '../config.js'
 import myitem from './_myitem'
-import QueryBuilder from '../services/QueryBuildService.js'
 
 export default {
   data () {
     return {
-      userid: 'mslingsu',
-      type: 'skills',
-      admin: false,
-      skills: []
+      type: 'skills'
     }
   },
-  mounted () {
-    this.load()
-  },
   methods: {
-    load () {
-      var querystring = {
-        id: this.userid
-      }
-      var url = Config.BASE_URL + '/skills?' + QueryBuilder.build(querystring)
-
-      fetch(url).then(response => {
-        return response.json()
-      }).then(data => {
-        //  TODO count time and spinner
-        this.skills = data
-        this.skills.sort(function (a, b) {
-          return a.order - b.order
-        })
-      }).catch(err => {
-        console.error(err)
-      })
-    },
     addSkill () {
       var k = {
         skill: '',
@@ -95,7 +70,7 @@ export default {
           'Content-Type': 'application/json'
         })
       }
-      var url = Config.BASE_URL + '/skills'
+      var url = Config.BASE_URL + '/userdata'
       fetch(url, opts).then(response => {
         var data = response.json()
         console.log(data)
@@ -107,6 +82,7 @@ export default {
   },
   components: {
     myitem: myitem
-  }
+  },
+  props: ['skills', 'admin']
 }
 </script>

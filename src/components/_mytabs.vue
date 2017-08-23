@@ -9,7 +9,7 @@
   </md-tab>
 
   <md-tab md-label="PROGRAMMING SKILLS" md-icon="build">
-    <skills></skills>
+    <skills :skills="skills" :admin="admin"></skills>
   </md-tab>
 
   <md-tab md-label="WORK EXPERIENCE" md-icon="color_lens">
@@ -32,9 +32,70 @@ import experiences from './experiences'
 import academic from './academic'
 import certificates from './certificates'
 import education from './education'
+import Config from '../config.js'
+import QueryBuilder from '../services/QueryBuildService.js'
 
 export default {
+  data () {
+    return {
+      userid: 'mslingsu',
+      admin: true,
+      skills: [],
+      education: [],
+      experiences: [],
+      certificates: [],
+      academic: []
+    }
+  },
+  mounted () {
+    this.load()
+  },
+  methods: {
+    load () {
+      var querystring = {
+        id: this.userid
+      }
+      var url = Config.BASE_URL + '/userdata?' + QueryBuilder.build(querystring)
 
+      fetch(url).then(response => {
+        return response.json()
+      }).then(data => {
+        //  TODO count time and spinner
+        if (data[0]) {
+          this.skills = data[0]['skills'] ? this.sortbyorder(data[0]['skills']) : []
+          console.log(this.skills)
+          this.education = data[0]['education'] ? this.sortbyorder(data[0]['education']) : []
+          this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
+          this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
+          this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
+          // this.skills.sort(function (a, b) {
+          //   if (!(a.order)) {
+          //     a.order = 1000
+          //   }
+          //   if (!(b.order)) {
+          //     b.order = 1000
+          //   }
+          //   return a.order - b.order
+          // })
+        }
+      }).catch(err => {
+        console.error(err)
+      })
+    },
+    sortbyorder (arr) {
+      debugger
+      arr.sort(function (a, b) {
+        if (!(a.order)) {
+          a.order = 1000
+        }
+        if (!(b.order)) {
+          b.order = 1000
+        }
+        return a.order - b.order
+      })
+      return arr
+    }
+  },
   components: {
     skills: skills,
     experiences: experiences,
