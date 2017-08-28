@@ -41,6 +41,14 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
+      // {
+      //   test: /\.js$/,
+      //   loader: 'babel-loader',
+      //   query: {
+      //     presets: ['es2015']
+      //   },
+      //   include: [resolve('src'), resolve('test')]
+      // },
       {
         test: /\.js$/,
         loader: 'babel-loader',

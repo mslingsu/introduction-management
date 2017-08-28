@@ -9,7 +9,7 @@
   </md-tab>
 
   <md-tab md-label="PROGRAMMING SKILLS" md-icon="build">
-    <skills :skills="skills" :admin="admin"></skills>
+    <skills :skills="skills" :admin="authenticated"></skills>
   </md-tab>
 
   <md-tab md-label="WORK EXPERIENCE" md-icon="color_lens">
@@ -39,7 +39,6 @@ export default {
   data () {
     return {
       userid: 'mslingsu',
-      admin: true,
       skills: [],
       education: [],
       experiences: [],
@@ -63,27 +62,16 @@ export default {
         //  TODO count time and spinner
         if (data[0]) {
           this.skills = data[0]['skills'] ? this.sortbyorder(data[0]['skills']) : []
-          console.log(this.skills)
           this.education = data[0]['education'] ? this.sortbyorder(data[0]['education']) : []
           this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
           this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
           this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
-          // this.skills.sort(function (a, b) {
-          //   if (!(a.order)) {
-          //     a.order = 1000
-          //   }
-          //   if (!(b.order)) {
-          //     b.order = 1000
-          //   }
-          //   return a.order - b.order
-          // })
         }
       }).catch(err => {
         console.error(err)
       })
     },
     sortbyorder (arr) {
-      debugger
       arr.sort(function (a, b) {
         if (!(a.order)) {
           a.order = 1000
@@ -102,6 +90,7 @@ export default {
     academic: academic,
     certificates: certificates,
     education: education
-  }
+  },
+  props: ['auth', 'authenticated']
 }
 </script>
