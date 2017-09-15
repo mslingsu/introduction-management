@@ -4,7 +4,7 @@
       <nav>
         <ul class="nav nav-pills pull-right">
           <router-link tag="li" to="/" exact><a>Home</a></router-link>
-          <!-- <router-link tag="li" v-if="loggedIn" to="/dashboard"><a>Dashboard</a></router-link> -->
+          <router-link tag="li" v-if="loggedIn" :to="dashlink"><a>Dashboard</a></router-link>
           <router-link tag="li" v-if="loggedIn" to="/change_password"><a>Change Password</a></router-link>
           <router-link tag="li" v-if="loggedIn" to="/logout"><a>Log out</a></router-link>
           <router-link tag="li" v-if="!loggedIn" to="/login"><a>Log in</a></router-link>
@@ -27,7 +27,8 @@
 export default {
   data () {
     return {
-      loggedIn: false
+      loggedIn: false,
+      dashlink: '/'
     }
   },
   created () {
@@ -37,6 +38,10 @@ export default {
         return
       }
       this.loggedIn = loggedIn
+      var user = this.$cognitoAuth.getCurrentUser()
+      if(user){
+        this.dashlink = this.dashlink + 'user/' + user.username
+      }
     })
     this.$cognitoAuth.onChange = loggedIn => {
       this.loggedIn = loggedIn

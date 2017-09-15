@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from '@/components/Home.vue'
+import Home from '@/components/Home.vue'
 import Login from '@/components/Login.vue'
 import Signup from '@/components/Signup.vue'
 import Confirm from '@/components/Confirm.vue'
@@ -32,7 +32,8 @@ export default new Router({
   mode: 'history',
   base: __dirname,
   routes: [
-    { path: '/', component: mytabs },
+    { path: '/', component: Home },
+    { path: '/user/:uid', component: mytabs },
     { path: '/dashboard', component: Dashboard, beforeEnter: requireAuth },
     { path: '/login', component: Login },
     { path: '/signup', component: Signup },
