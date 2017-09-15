@@ -32,19 +32,20 @@ import experiences from './experiences'
 import academic from './academic'
 import certificates from './certificates'
 import education from './education'
-import Config from '../config.js'
-import QueryBuilder from '../services/QueryBuildService.js'
+import Config from '../../config.js'
+import QueryBuilder from '../../services/QueryBuildService.js'
+import jwtDecode from 'jwt-decode'
 
 export default {
   data () {
     return {
       userid: 'mslingsu',
-      admin: true,
       skills: [],
       education: [],
       experiences: [],
       certificates: [],
-      academic: []
+      academic: [],
+      admin: false
     }
   },
   mounted () {
@@ -52,6 +53,27 @@ export default {
   },
   methods: {
     load () {
+      // this.$cognitoAuth.isAuthenticated((err, loggedIn) => {
+      //   if (err) {
+      //     console.err("App: Couldn't get the session:", err, err.stack)
+      //     return
+      //   }
+      //   this.admin = loggedIn
+      // })
+
+      this.$cognitoAuth.getIdToken((err, jwtToken) => {
+        if (err) {
+          console.log("Dashboard: Couldn't get the session:", err, err.stack)
+          return
+        }
+        this.token = jwtDecode(jwtToken)
+        this.user = this.$cognitoAuth.getCurrentUser()
+        // TODO user in url, then compare content owener with current user
+        // For example
+        // this.admin = this.user.username === 'mslingsu'
+        this.admin = true
+        console.log(this.user.username)
+      })
       var querystring = {
         id: this.userid
       }
@@ -63,27 +85,16 @@ export default {
         //  TODO count time and spinner
         if (data[0]) {
           this.skills = data[0]['skills'] ? this.sortbyorder(data[0]['skills']) : []
-          console.log(this.skills)
           this.education = data[0]['education'] ? this.sortbyorder(data[0]['education']) : []
           this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
           this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
           this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
-          // this.skills.sort(function (a, b) {
-          //   if (!(a.order)) {
-          //     a.order = 1000
-          //   }
-          //   if (!(b.order)) {
-          //     b.order = 1000
-          //   }
-          //   return a.order - b.order
-          // })
         }
       }).catch(err => {
         console.error(err)
       })
     },
     sortbyorder (arr) {
-      debugger
       arr.sort(function (a, b) {
         if (!(a.order)) {
           a.order = 1000

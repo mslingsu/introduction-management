@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Config from '../config.js'
+import Config from '../../config.js'
 import myitem from './_myitem'
 
 export default {

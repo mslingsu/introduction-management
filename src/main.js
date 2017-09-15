@@ -1,14 +1,13 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
+import VueResource from 'vue-resource'
 import router from './router'
+import cognitoAuth from './cognito'
+import App from './App.vue'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 
-Vue.config.productionTip = false
+Vue.use(VueResource)
 Vue.use(VueMaterial)
-
 Vue.material.registerTheme('default', {
   primary: {
     color: 'grey',
@@ -26,11 +25,11 @@ Vue.material.registerTheme('default', {
     textColor: 'white'
   }
 })
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  template: '<App/>',
-  components: { App }
+  cognitoAuth,
+  // replace the content of <div id="app"></div> with App
+  render: h => h(App)
 })
