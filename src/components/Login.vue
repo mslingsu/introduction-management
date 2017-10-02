@@ -40,7 +40,7 @@ export default {
           this.error = err
           console.error(err)
         } else {
-          this.$router.replace(this.$route.query.redirect || '/dashboard')
+          this.$router.replace(this.$route.query.redirect || '/user/'+this.username)
         }
       })
     }
