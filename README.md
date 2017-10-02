@@ -29,3 +29,12 @@ npm test
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 # introduction-management
+After downloading this project, you have to create config file under `src/cognito/` to put all the Cognito information.
+```
+export default {
+  region: 'us-west-2',
+  IdentityPoolId: '',
+  UserPoolId: 'us-west-2_*',
+  ClientId: ''
+}
+```
