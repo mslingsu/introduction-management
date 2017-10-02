@@ -5,11 +5,11 @@
   </md-tab>
 
   <md-tab md-label="EDUCATION" md-icon="school">
-    <education></education>
+    <education :education="education" :skills="skills" :admin="admin"></education>
   </md-tab>
 
   <md-tab md-label="PROGRAMMING SKILLS" md-icon="build">
-    <skills :skills="skills" :admin="admin"></skills>
+    <skills :skills="skills" :education="education" :admin="admin"></skills>
   </md-tab>
 
   <md-tab md-label="WORK EXPERIENCE" md-icon="color_lens">
@@ -39,7 +39,8 @@ import jwtDecode from 'jwt-decode'
 export default {
   data () {
     return {
-      userid: 'mslingsu',
+      userid: null,
+      profileid: null,
       skills: [],
       education: [],
       experiences: [],
@@ -60,22 +61,28 @@ export default {
       //   }
       //   this.admin = loggedIn
       // })
-
+      this.profileid = this.$route.params.uid
       this.$cognitoAuth.getIdToken((err, jwtToken) => {
         if (err) {
           console.log("Dashboard: Couldn't get the session:", err, err.stack)
           return
         }
-        this.token = jwtDecode(jwtToken)
-        this.user = this.$cognitoAuth.getCurrentUser()
-        // TODO user in url, then compare content owener with current user
-        // For example
-        // this.admin = this.user.username === 'mslingsu'
-        this.admin = true
-        console.log(this.user.username)
+        if(jwtToken){
+          this.token = jwtDecode(jwtToken)
+          this.user = this.$cognitoAuth.getCurrentUser()
+          // TODO user in url, then compare content owener with current user
+          // For example
+          // this.admin = this.user.username === 'mslingsu'
+          this.userid = this.user.username
+          if(this.userid === this.profileid){
+            this.admin = true
+          } else {
+            this.admin = false
+          }
+        }
       })
       var querystring = {
-        id: this.userid
+        id: this.profileid
       }
       var url = Config.BASE_URL + '/userdata?' + QueryBuilder.build(querystring)
 
