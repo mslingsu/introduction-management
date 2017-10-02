@@ -45,8 +45,8 @@ export default {
   methods: {
     addSkill () {
       var k = {
-        skill: '',
-        Details: '',
+        skill: null,
+        Details: null,
         order: null
       }
       this.skills.push(k)
@@ -58,9 +58,11 @@ export default {
       }
     },
     onSave () {
+
       var payload = {
-        'id': this.userid,
-        'skills': this.skills
+        'id': this.$route.params.uid,
+        'skills': this.skills,
+        'education': this.education
       }
       var body = JSON.stringify(payload)
       var opts = {
@@ -83,6 +85,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['skills', 'admin']
+  props: ['skills', 'education', 'admin']
 }
 </script>
