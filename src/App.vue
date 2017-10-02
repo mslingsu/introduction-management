@@ -18,7 +18,7 @@
       </template>
     </div>
     <footer class="footer">
-        <p>© 2017 Company, Inc.</p>
+        <p>© 2017 Ling Su</p>
     </footer>
   </div>
 </template>
@@ -28,7 +28,12 @@ export default {
   data () {
     return {
       loggedIn: false,
+      profiler: true,
       dashlink: '/'
+    }
+  },
+  watch: {
+    loggedIn: function(newVal){
     }
   },
   created () {
@@ -38,13 +43,16 @@ export default {
         return
       }
       this.loggedIn = loggedIn
-      var user = this.$cognitoAuth.getCurrentUser()
-      if(user){
-        this.dashlink = this.dashlink + 'user/' + user.username
-      }
+
     })
     this.$cognitoAuth.onChange = loggedIn => {
       this.loggedIn = loggedIn
+      if(this.loggedIn){
+        var user = this.$cognitoAuth.getCurrentUser()
+        if(user){
+          this.dashlink = '/user/' + user.username
+        }
+      }
     }
   }
 }
