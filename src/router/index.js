@@ -27,13 +27,23 @@ function requireAuth (to, from, next) {
   })
 }
 
+function checkAdmin(to, from, next) {
+  var user = cognitoAuth.getCurrentUser()
+  if(user !== null){
+    if(user.username !== to.params.uid){
+      cognitoAuth.logout()
+    }
+  }
+  next()
+}
+
 export default new Router({
   linkActiveClass: 'active',
   mode: 'history',
   base: __dirname,
   routes: [
     { path: '/', component: Home },
-    { path: '/user/:uid', component: mytabs },
+    { path: '/user/:uid', component: mytabs, beforeEnter: checkAdmin },
     { path: '/dashboard', component: Dashboard, beforeEnter: requireAuth },
     { path: '/login', component: Login },
     { path: '/signup', component: Signup },
