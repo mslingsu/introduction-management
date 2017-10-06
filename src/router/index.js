@@ -38,8 +38,8 @@ function checkAdmin(to, from, next) {
 }
 
 export default new Router({
-  linkActiveClass: 'active',
-  mode: 'history',
+  // linkActiveClass: 'active',
+  // mode: 'history',
   base: __dirname,
   routes: [
     { path: '/', component: Home },
