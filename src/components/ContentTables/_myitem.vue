@@ -81,6 +81,64 @@
     </md-input-container>
   </md-card-content>
 
+  <md-card-content v-if="formtype==='experience'">
+    <md-input-container>
+      <label>Company Name</label>
+      <md-input class="md-title" v-model="data.company"></md-input>
+    </md-input-container>
+
+    <md-layout md-gutter>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <label>Title</label>
+          <md-input v-model="data.title"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <label>Department</label>
+          <md-input v-model="data.depart"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    </md-layout>
+
+    <md-layout md-gutter>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <label>From Year</label>
+          <md-input type="number" v-model="data.from"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <label>To Year</label>
+          <md-input type="number" v-model="data.to"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    </md-layout>
+    <md-input-container>
+      <label>Location</label>
+      <md-input v-model="data.location"></md-input>
+    </md-input-container>
+    <md-input-container>
+      <label>Description</label>
+      <md-textarea v-model="data.dest"></md-textarea>
+    </md-input-container>
+    <md-input-container>
+      <label>Order</label>
+      <md-input type="number" v-model="data.order"></md-input>
+    </md-input-container>
+  </md-card-content>
+
+
   <md-card-actions>
     <md-button class="md-fab md-mini md-warn" @click.native="remove(data)">
       <md-icon>delete</md-icon>

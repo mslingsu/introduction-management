@@ -24,8 +24,8 @@
 
   <md-table-body>
     <md-table-row v-for='(row, index) in skills' :key='index'>
-      <md-table-cell>{{row.skill}}</md-table-cell>
-      <md-table-cell>{{row.Details}}</md-table-cell>
+      <md-table-cell class="md-title">{{row.skill}}</md-table-cell>
+      <md-table-cell class="md-subhead">{{row.Details}}</md-table-cell>
       <!-- <md-table-cell md-numeric>{{row.order}}</md-table-cell> -->
     </md-table-row>
   </md-table-body>
@@ -61,6 +61,7 @@ export default {
 
       var payload = {
         'id': this.$route.params.uid,
+        'experiences': this.experiences,
         'skills': this.skills,
         'education': this.education
       }
@@ -85,6 +86,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['skills', 'education', 'admin']
+  props: ['skills', 'education', 'experiences', 'admin']
 }
 </script>

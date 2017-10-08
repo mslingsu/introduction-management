@@ -5,22 +5,37 @@
   </md-tab>
 
   <md-tab md-label="EDUCATION" md-icon="school">
-    <education :education="education" :skills="skills" :admin="admin"></education>
+    <education
+    :skills="skills"
+    :education="education"
+    :experiences="experiences"
+    :admin="admin">
+  </education>
   </md-tab>
 
-  <md-tab md-label="PROGRAMMING SKILLS" md-icon="build">
-    <skills :skills="skills" :education="education" :admin="admin"></skills>
+  <md-tab md-label="SKILLS" md-icon="build">
+    <skills
+    :skills="skills"
+    :education="education"
+    :experiences="experiences"
+    :admin="admin">
+  </skills>
   </md-tab>
 
-  <md-tab md-label="WORK EXPERIENCE" md-icon="color_lens">
-    <experiences></experiences>
+  <md-tab md-label="EXPERIENCE" md-icon="color_lens">
+    <experiences
+    :skills="skills"
+    :education="education"
+    :experiences="experiences"
+    :admin="admin">
+  </experiences>
   </md-tab>
 
   <md-tab md-label="CERTIFICATES" md-icon="library_books">
     <certificates></certificates>
   </md-tab>
 
-  <md-tab md-label="ACADEMIC PROJECTS" md-icon="local_library">
+  <md-tab md-label="PUBLICATION" md-icon="local_library">
     <academic></academic>
   </md-tab>
 </md-tabs>
@@ -70,9 +85,6 @@ export default {
         if(jwtToken){
           this.token = jwtDecode(jwtToken)
           this.user = this.$cognitoAuth.getCurrentUser()
-          // TODO user in url, then compare content owener with current user
-          // For example
-          // this.admin = this.user.username === 'mslingsu'
           this.userid = this.user.username
           if(this.userid === this.profileid){
             this.admin = true
@@ -96,6 +108,11 @@ export default {
           this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
           this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
           this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
+          this.experiences.forEach(item => {
+            if(item.to === null){
+              item.to = 'Now'
+            }
+          })
         }
       }).catch(err => {
         console.error(err)

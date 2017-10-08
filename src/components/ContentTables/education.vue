@@ -84,6 +84,7 @@ export default {
       // })
       var payload = {
         'id': this.$route.params.uid,
+        'experiences': this.experiences,
         'education': this.education,
         'skills': this.skills
       }
@@ -108,6 +109,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['education', 'skills', 'admin']
+  props: ['education', 'skills', 'experiences', 'admin']
 }
 </script>
