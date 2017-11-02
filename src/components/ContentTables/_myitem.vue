@@ -22,7 +22,7 @@
         <md-layout md-column>
           <md-input-container>
             <label>Order</label>
-            <md-input type="number" v-model="data.order"></md-input>
+            <md-input type="number" min=0 v-model="data.order"></md-input>
           </md-input-container>
         </md-layout>
       </md-layout>
@@ -77,7 +77,7 @@
     </md-input-container>
     <md-input-container>
       <label>Order</label>
-      <md-input type="number" v-model="data.order"></md-input>
+      <md-input type="number" min=0 v-model="data.order"></md-input>
     </md-input-container>
   </md-card-content>
 
@@ -134,7 +134,66 @@
     </md-input-container>
     <md-input-container>
       <label>Order</label>
-      <md-input type="number" v-model="data.order"></md-input>
+      <md-input type="number" min=0 v-model="data.order"></md-input>
+    </md-input-container>
+  </md-card-content>
+
+  <md-card-content v-if="formtype==='certificate'">
+    <md-input-container>
+      <label>Certificate Name</label>
+      <md-input class="md-title" v-model="data.cert"></md-input>
+    </md-input-container>
+    <md-input-container>
+      <label>Issued By</label>
+      <md-input v-model="data.authby"></md-input>
+    </md-input-container>
+
+    <md-layout md-gutter>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <label>From</label>
+          <md-input type="number" max=2018 min=1900 v-model="data.fromyear"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <md-input type="number" max=12 min=1 v-model="data.frommonth"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    </md-layout>
+
+    <md-layout md-gutter>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <label>To</label>
+          <md-input type="number" v-model="data.toyear"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    <md-layout md-flex="50">
+      <md-layout md-column>
+        <md-input-container>
+          <md-input type="number" v-model="data.tomonth"></md-input>
+        </md-input-container>
+      </md-layout>
+    </md-layout>
+    </md-layout>
+    <md-input-container>
+      <label>License Number</label>
+      <md-input v-model="data.license"></md-input>
+    </md-input-container>
+    <md-input-container>
+      <label>Certification URL</label>
+      <md-input v-model="data.url"></md-input>
+    </md-input-container>
+    <md-input-container>
+      <label>Order</label>
+      <md-input type="number" min=0 v-model="data.order"></md-input>
     </md-input-container>
   </md-card-content>
 

@@ -68,6 +68,7 @@ export default {
         'id': this.$route.params.uid,
         'experiences': this.experiences,
         'education': this.education,
+        'certificates': this.certificates,
         'skills': this.skills
       }
       var body = JSON.stringify(payload)
@@ -91,6 +92,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['education', 'skills', 'experiences', 'admin']
+  props: ['education', 'skills', 'experiences', 'certificates', 'admin']
 }
 </script>

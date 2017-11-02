@@ -13,23 +13,31 @@
   </md-button>
 </div>
 
-<md-table v-else>
+<div v-else>
+  <div v-for='(row, index) in skills' :key='index'>
+  <md-card md-with-hover>
+    <md-card-header>
+    <div class="md-title">{{row.skill}}</div>
+    <div class="md-subhead">{{row.Details}}</div>
+  </md-card-header>
+
+  </md-card>
+</div>
+</div>
+<!-- <md-table v-else>
   <md-table-header>
     <md-table-row>
       <md-table-head>Skills</md-table-head>
       <md-table-head>Details</md-table-head>
-      <!-- <md-table-head md-sort-by='order' md-numeric>Order</md-table-head> -->
     </md-table-row>
   </md-table-header>
-
   <md-table-body>
     <md-table-row v-for='(row, index) in skills' :key='index'>
       <md-table-cell class="md-title">{{row.skill}}</md-table-cell>
       <md-table-cell class="md-subhead">{{row.Details}}</md-table-cell>
-      <!-- <md-table-cell md-numeric>{{row.order}}</md-table-cell> -->
     </md-table-row>
   </md-table-body>
-</md-table>
+</md-table> -->
 </template>
 
 <script>
@@ -63,6 +71,7 @@ export default {
         'id': this.$route.params.uid,
         'experiences': this.experiences,
         'skills': this.skills,
+        'certificates': this.certificates,
         'education': this.education
       }
       var body = JSON.stringify(payload)
@@ -86,6 +95,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['skills', 'education', 'experiences', 'admin']
+  props: ['skills', 'education', 'experiences', 'certificates', 'admin']
 }
 </script>

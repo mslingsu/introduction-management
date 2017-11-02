@@ -9,6 +9,7 @@
     :skills="skills"
     :education="education"
     :experiences="experiences"
+    :certificates="certificates"
     :admin="admin">
   </education>
   </md-tab>
@@ -17,6 +18,7 @@
     <skills
     :skills="skills"
     :education="education"
+    :certificates="certificates"
     :experiences="experiences"
     :admin="admin">
   </skills>
@@ -27,12 +29,19 @@
     :skills="skills"
     :education="education"
     :experiences="experiences"
+    :certificates="certificates"
     :admin="admin">
   </experiences>
   </md-tab>
 
   <md-tab md-label="CERTIFICATES" md-icon="library_books">
-    <certificates></certificates>
+    <certificates
+    :skills="skills"
+    :education="education"
+    :experiences="experiences"
+    :certificates="certificates"
+    :admin="admin">
+  </certificates>
   </md-tab>
 
   <md-tab md-label="PUBLICATION" md-icon="local_library">
