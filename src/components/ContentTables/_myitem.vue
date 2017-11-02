@@ -160,7 +160,20 @@
     <md-layout md-flex="50">
       <md-layout md-column>
         <md-input-container>
-          <md-input type="number" max=12 min=1 v-model="data.frommonth"></md-input>
+          <md-select v-model="data.frommonth">
+            <md-option value="January">January</md-option>
+            <md-option value="February">February</md-option>
+            <md-option value="March">March</md-option>
+            <md-option value="April">April</md-option>
+            <md-option value="May">May</md-option>
+            <md-option value="June">June</md-option>
+            <md-option value="July">July</md-option>
+            <md-option value="August">August</md-option>
+            <md-option value="September">September</md-option>
+            <md-option value="October">October</md-option>
+            <md-option value="November">November</md-option>
+            <md-option value="December">December</md-option>
+          </md-select>
         </md-input-container>
       </md-layout>
     </md-layout>
@@ -178,7 +191,20 @@
     <md-layout md-flex="50">
       <md-layout md-column>
         <md-input-container>
-          <md-input type="number" v-model="data.tomonth"></md-input>
+          <md-select v-model="data.tomonth">
+            <md-option value="January">January</md-option>
+            <md-option value="February">February</md-option>
+            <md-option value="March">March</md-option>
+            <md-option value="April">April</md-option>
+            <md-option value="May">May</md-option>
+            <md-option value="June">June</md-option>
+            <md-option value="July">July</md-option>
+            <md-option value="August">August</md-option>
+            <md-option value="September">September</md-option>
+            <md-option value="October">October</md-option>
+            <md-option value="November">November</md-option>
+            <md-option value="December">December</md-option>
+          </md-select>
         </md-input-container>
       </md-layout>
     </md-layout>
