@@ -55,7 +55,7 @@ export default {
   created() {
     this.$cognitoAuth.isAuthenticated((err, loggedIn) => {
       if (err) {
-        console.err("App: Couldn't get the session:", err, err.stack)
+        console.error("App: Couldn't get the session:", err, err.stack)
         return
       }
       this.loggedIn = loggedIn
