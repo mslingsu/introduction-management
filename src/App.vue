@@ -36,7 +36,7 @@
 import Config from './config.js'
 
 export default {
-  data() {
+  data () {
     return {
       alert: {
         content: 'pending',
@@ -49,17 +49,16 @@ export default {
     }
   },
   watch: {
-    loggedIn: function(newVal) {}
+    loggedIn: function (newVal) {}
   },
-  mounted() {},
-  created() {
+  mounted () {},
+  created () {
     this.$cognitoAuth.isAuthenticated((err, loggedIn) => {
       if (err) {
         console.error("App: Couldn't get the session:", err, err.stack)
         return
       }
       this.loggedIn = loggedIn
-
     })
     this.$cognitoAuth.onChange = loggedIn => {
       this.loggedIn = loggedIn
@@ -72,49 +71,46 @@ export default {
     }
   },
   methods: {
-    subscribe() {
+    subscribe () {
       var mat = this.subemail.match(/^.+@.+\..+$/)
-      if (mat!==null && mat.length > 0) {
+      if (mat !== null && mat.length > 0) {
         var subURL = Config.BASE_URL + '/subcribe'
         var payload = {
-          "email": this.subemail
+          'email': this.subemail
         }
-        var body = JSON.stringify(payload);
+        var body = JSON.stringify(payload)
         var opts = {
-          method: "POST",
+          method: 'POST',
           body: body,
           headers: new Headers({
             'Content-Type': 'application/json'
           })
-        };
+        }
         fetch(subURL, opts).then((response) => {
-          var data = response.json();
-          console.log(data);
-          this.alert.content = "Please confirm your subscription in you email inbox."
-          this.alert.ok = "Cool!"
-          this.openDialog();
-          return
-        }, function(err) {
-          console.error(err);
+          var data = response.json()
+          console.log(data)
+          this.alert.content = 'Please confirm your subscription in you email inbox.'
+          this.alert.ok = 'Cool!'
+          this.openDialog()
+        }, function (err) {
+          console.error(err)
         })
-
       }
-      this.alert.content = "Please input a valid email address."
-      this.alert.ok = "Ok"
-      this.openDialog();
-
+      this.alert.content = 'Please input a valid email address.'
+      this.alert.ok = 'Ok'
+      this.openDialog()
     },
-    openDialog() {
-      this.$refs['subalert'].open();
+    openDialog () {
+      this.$refs['subalert'].open()
     },
-    closeDialog() {
-      this.$refs['subalert'].close();
+    closeDialog () {
+      this.$refs['subalert'].close()
     },
-    onOpen() {
-      console.log('Opened');
+    onOpen () {
+      console.log('Opened')
     },
-    onClose(type) {
-      console.log('Closed', type);
+    onClose (type) {
+      console.log('Closed', type)
     }
   }
 }

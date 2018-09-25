@@ -235,7 +235,7 @@
 <script>
 export default {
   methods: {
-    remove(data) {
+    remove (data) {
       if (this.$parent.remove) {
         this.$parent.remove(data)
       }

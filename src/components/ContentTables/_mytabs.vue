@@ -1,7 +1,29 @@
 <template>
 <md-tabs md-centered>
   <md-tab md-label="Welcome" md-icon="home">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+    <div v-if="admin">
+      <md-input-container>
+        <label>Headline</label>
+        <md-input v-model="headline"></md-input>
+      </md-input-container>
+      <md-input-container>
+        <label>Summary</label>
+        <md-textarea v-model="summary"></md-textarea>
+      </md-input-container>
+      <md-button class="md-raised md-accent" @click.native="onSave">
+        <md-icon>save</md-icon>
+        Save Changes
+      </md-button>
+    </div>
+
+    <div v-else>
+      <md-card>
+        <md-card-content>
+         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+       </md-card-content>
+      </md-card>
+    </div>
+
   </md-tab>
 
   <md-tab md-label="EDUCATION" md-icon="school">
@@ -10,6 +32,8 @@
     :education="education"
     :experiences="experiences"
     :certificates="certificates"
+    :headline="headline"
+    :summary="summary"
     :admin="admin">
   </education>
   </md-tab>
@@ -20,6 +44,8 @@
     :education="education"
     :certificates="certificates"
     :experiences="experiences"
+    :headline="headline"
+    :summary="summary"
     :admin="admin">
   </skills>
   </md-tab>
@@ -30,6 +56,8 @@
     :education="education"
     :experiences="experiences"
     :certificates="certificates"
+    :headline="headline"
+    :summary="summary"
     :admin="admin">
   </experiences>
   </md-tab>
@@ -40,13 +68,15 @@
     :education="education"
     :experiences="experiences"
     :certificates="certificates"
+    :headline="headline"
+    :summary="summary"
     :admin="admin">
   </certificates>
   </md-tab>
 
-  <md-tab md-label="PUBLICATION" md-icon="local_library">
+  <!-- <md-tab md-label="PUBLICATION" md-icon="local_library">
     <academic></academic>
-  </md-tab>
+  </md-tab> -->
 </md-tabs>
 </md-tabs>
 </template>
@@ -70,6 +100,8 @@ export default {
       experiences: [],
       certificates: [],
       academic: [],
+      headline: '',
+      summary: '',
       admin: false
     }
   },
@@ -91,11 +123,11 @@ export default {
           console.log("Dashboard: Couldn't get the session:", err, err.stack)
           return
         }
-        if(jwtToken){
+        if (jwtToken) {
           this.token = jwtDecode(jwtToken)
           this.user = this.$cognitoAuth.getCurrentUser()
           this.userid = this.user.username
-          if(this.userid === this.profileid){
+          if (this.userid === this.profileid) {
             this.admin = true
           } else {
             this.admin = false
@@ -117,8 +149,10 @@ export default {
           this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
           this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
           this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
+          this.headline = data[0]['headline']
+          this.summary = data[0]['summary']
           this.experiences.forEach(item => {
-            if(item.to === null){
+            if (item.to === null) {
               item.to = 'Now'
             }
           })
@@ -138,6 +172,8 @@ export default {
         return a.order - b.order
       })
       return arr
+    },
+    onSave () {
     }
   },
   components: {

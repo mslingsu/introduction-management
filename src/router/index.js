@@ -27,10 +27,10 @@ function requireAuth (to, from, next) {
   })
 }
 
-function checkAdmin(to, from, next) {
+function checkAdmin (to, from, next) {
   var user = cognitoAuth.getCurrentUser()
-  if(user !== null){
-    if(user.username !== to.params.uid){
+  if (user !== null) {
+    if (user.username !== to.params.uid) {
       cognitoAuth.logout()
     }
   }

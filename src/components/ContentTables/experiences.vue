@@ -66,6 +66,8 @@ export default {
     onSave () {
       var payload = {
         'id': this.$route.params.uid,
+        'summary': this.summary,
+        'headline': this.headline,
         'experiences': this.experiences,
         'education': this.education,
         'certificates': this.certificates,
@@ -92,6 +94,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['education', 'skills', 'experiences', 'certificates', 'admin']
+  props: ['education', 'skills', 'experiences', 'certificates', 'headline', 'summary', 'admin']
 }
 </script>
