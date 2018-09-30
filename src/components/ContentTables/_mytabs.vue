@@ -1,29 +1,15 @@
 <template>
 <md-tabs md-centered>
   <md-tab md-label="Welcome" md-icon="home">
-    <div v-if="admin">
-      <md-input-container>
-        <label>Headline</label>
-        <md-input v-model="headline"></md-input>
-      </md-input-container>
-      <md-input-container>
-        <label>Summary</label>
-        <md-textarea v-model="summary"></md-textarea>
-      </md-input-container>
-      <md-button class="md-raised md-accent" @click.native="onSave">
-        <md-icon>save</md-icon>
-        Save Changes
-      </md-button>
-    </div>
-
-    <div v-else>
-      <md-card>
-        <md-card-content>
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-       </md-card-content>
-      </md-card>
-    </div>
-
+    <landing
+    :skills="skills"
+    :education="education"
+    :experiences="experiences"
+    :certificates="certificates"
+    :academic="academic"
+    :summary="summary"
+    :admin="admin">
+    </landing>
   </md-tab>
 
   <md-tab md-label="EDUCATION" md-icon="school">
@@ -32,7 +18,7 @@
     :education="education"
     :experiences="experiences"
     :certificates="certificates"
-    :headline="headline"
+    :academic="academic"
     :summary="summary"
     :admin="admin">
   </education>
@@ -44,7 +30,7 @@
     :education="education"
     :certificates="certificates"
     :experiences="experiences"
-    :headline="headline"
+    :academic="academic"
     :summary="summary"
     :admin="admin">
   </skills>
@@ -56,7 +42,7 @@
     :education="education"
     :experiences="experiences"
     :certificates="certificates"
-    :headline="headline"
+    :academic="academic"
     :summary="summary"
     :admin="admin">
   </experiences>
@@ -68,7 +54,7 @@
     :education="education"
     :experiences="experiences"
     :certificates="certificates"
-    :headline="headline"
+    :academic="academic"
     :summary="summary"
     :admin="admin">
   </certificates>
@@ -81,6 +67,7 @@
 </md-tabs>
 </template>
 <script>
+import landing from './landing'
 import skills from './skills'
 import experiences from './experiences'
 import academic from './academic'
@@ -100,8 +87,7 @@ export default {
       experiences: [],
       certificates: [],
       academic: [],
-      headline: '',
-      summary: '',
+      summary: {},
       admin: false
     }
   },
@@ -149,8 +135,7 @@ export default {
           this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
           this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
           this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
-          this.headline = data[0]['headline']
-          this.summary = data[0]['summary']
+          this.summary = data[0]['summary'] ? data[0]['summary'] : {name: '', headline: ''}
           this.experiences.forEach(item => {
             if (item.to === null) {
               item.to = 'Now'
@@ -177,6 +162,7 @@ export default {
     }
   },
   components: {
+    landing: landing,
     skills: skills,
     experiences: experiences,
     academic: academic,
