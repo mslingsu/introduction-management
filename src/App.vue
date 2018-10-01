@@ -12,7 +12,10 @@
         <router-link tag="li" v-if="loggedIn" :to="dashlink"><a>Dashboard</a></router-link>
         <router-link tag="li" v-if="loggedIn" to="/change_password"><a>Change Password</a></router-link>
         <router-link tag="li" v-if="loggedIn" to="/logout"><a>Log out</a></router-link>
-        <router-link tag="li" v-if="!loggedIn" to="/login"><a>Log in</a></router-link>
+        <router-link tag="li" style="
+          margin-left: 2px;
+          margin-top: 8px;"
+          v-if="!loggedIn" to="/login"><a>Log in</a></router-link>
         <router-link tag="li" v-if="!loggedIn" to="/signup"><a>Sign Up</a></router-link>
       </ul>
     </nav>

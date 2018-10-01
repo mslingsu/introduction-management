@@ -36,7 +36,7 @@
 <div v-else-if='admin'>
   <md-card class='md-primary'>
     <md-card-header>
-      <md-card-header-text>
+      <md-card-header-text style="width: 500px;">
           <md-input-container>
             <label>Name</label>
             <md-input class="md-title" v-model="summary.name"></md-input>
@@ -47,7 +47,7 @@
           </md-input-container>
       </md-card-header-text>
 
-      <md-card-media>
+      <md-card-media style="width: 120px;height: 120px;">
         <div  class='img-thumbnail' :style='thumburl'>
         </div>
       </md-card-media>
@@ -63,21 +63,21 @@
     </md-button>
 </div>
 
-<!-- <div v-else-if!='admin'>
+<div v-else-if='!admin'>
   <md-card>
   <md-card-header>
     <md-card-header-text>
-      <div class='md-title'>Primary color</div>
-      <div class='md-subhead'>Subtitle here</div>
+      <div class='md-title'>{{summary.name}}</div>
+      <div class='md-subhead'>{{summary.headline}}</div>
     </md-card-header-text>
 
-    <md-card-media>
-      <div  class='img-thumbnail' style='background: url("https://s3-us-west-2.amazonaws.com/introduce-ling-thumb/resize.jpg");'>
+    <md-card-media style="width: 120px;height: 120px;">
+      <div  class='img-thumbnail' :style='thumburl'>
       </div>
     </md-card-media>
   </md-card-header>
   </md-card>
-</div> -->
+</div>
 </template>
 
 <script>
@@ -91,7 +91,7 @@ export default {
   data () {
     return {
       viewupload: false,
-      thumburl: 'background:url(https://s3-us-west-2.amazonaws.com/introduce-ling-thumb/UID.jpg);',
+      thumburl: 'background:url(https://s3-us-west-2.amazonaws.com/introduce-ling-thumb/UID.jpg);width: 120px;height: 120px;',
       selectedFile: null,
       validFileExtensions: ['image/jpg', 'image/jpeg', 'image/bmp', 'image/gif', 'image/png'],
       uploadfile: {},
@@ -262,9 +262,12 @@ export default {
     width: 100%;
     height: 100%;
 }
-.md-card .md-card-header .md-card-media {
-    width: 120px;
-    flex: 0 0 120px;
-    height: 120px;
-}
+// .md-card .md-card-header .md-card-media {
+//     width: 120px;
+//     flex: 0 0 120px;
+//     height: 120px;
+// }
+// .md-card-header-text {
+//   width: 500px;
+// }
 </style>
