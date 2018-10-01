@@ -5,7 +5,10 @@
   <div class="header clearfix">
     <nav>
       <ul class="nav nav-pills pull-right">
-        <router-link tag="li" to="/" exact><a>Home</a></router-link>
+        <router-link tag="li" style="
+          margin-left: 2px;
+          margin-top: 8px;"
+          v-if="loggedIn" to="/" exact><a>Home</a></router-link>
         <router-link tag="li" v-if="loggedIn" :to="dashlink"><a>Dashboard</a></router-link>
         <router-link tag="li" v-if="loggedIn" to="/change_password"><a>Change Password</a></router-link>
         <router-link tag="li" v-if="loggedIn" to="/logout"><a>Log out</a></router-link>
@@ -51,7 +54,14 @@ export default {
   watch: {
     loggedIn: function (newVal) {}
   },
-  mounted () {},
+  mounted () {
+    if (this.loggedIn) {
+      var user = this.$cognitoAuth.getCurrentUser()
+      if (user) {
+        this.dashlink = '/user/' + user.username
+      }
+    }
+  },
   created () {
     this.$cognitoAuth.isAuthenticated((err, loggedIn) => {
       if (err) {
@@ -202,8 +212,6 @@ body {
   padding: 14px 24px;
   font-size: 21px;
 }
-
-
 
 
 /* Supporting marketing content */
