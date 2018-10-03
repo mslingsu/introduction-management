@@ -64,8 +64,9 @@
     </md-card-actions>
   </md-card>
   <md-button class='md-accent' @click.native='onSave'>
-      <md-icon>save</md-icon>
-      Save Changes
+      <md-icon v-if="!done">save</md-icon>
+      <md-icon v-if="done">done</md-icon>
+      {{savelabel}}
     </md-button>
 </div>
 
@@ -108,7 +109,9 @@ export default {
       uploadfile: {},
       uploadError: null,
       currentStatus: null,
-      uploadFieldName: 'photos'
+      uploadFieldName: 'photos',
+      done: false,
+      savelabel: 'Save changes'
     }
   },
   mounted () {
@@ -223,6 +226,12 @@ export default {
 
       fetch(url, opts).then(response => {
         var data = response.json()
+        this.done = true
+        this.savelabel = 'Changes saved'
+        window.setTimeout(() => {
+          this.savelabel = 'Save changes'
+          this.done = false
+        }, 3000)
         console.log(data)
         return data
       }, function (err) {

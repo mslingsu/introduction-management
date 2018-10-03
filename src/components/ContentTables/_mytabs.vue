@@ -2,7 +2,8 @@
   <div>
     <div v-if="admin" class="right">
     <md-button class='md-raised md-accent' @click.native='download'>
-        <md-icon>save_alt</md-icon>
+      <md-icon v-if="!done">cloud_download</md-icon>
+      <md-icon v-if="done">done</md-icon>
         <md-tooltip md-direction="left">Download CV as word document</md-tooltip>
       </md-button>
     </div>
@@ -96,6 +97,7 @@ export default {
       certificates: [],
       academic: [],
       summary: {},
+      done: false,
       admin: false
     }
   },
@@ -161,6 +163,10 @@ export default {
       }
       var url = Config.BASE_URL + '/download?' + QueryBuilder.build(querystring)
       fetch(url).then(response => {
+        this.done = true
+        window.setTimeout(() => {
+          this.done = false
+        }, 3000)
         return response.json()
       }).then(data => {
         if (data.match(/^https/)) {

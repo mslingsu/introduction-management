@@ -8,8 +8,9 @@
       Add certificates
     </md-button>
     <md-button class="md-accent" @click.native="onSave">
-      <md-icon>save</md-icon>
-      Save Changes
+      <md-icon v-if="!done">save</md-icon>
+      <md-icon v-if="done">done</md-icon>
+      {{savelabel}}
     </md-button>
   </div>
 
@@ -42,7 +43,9 @@ export default {
   data () {
     return {
       url: ['www.google.com', 'www.amazon.com'],
-      type: 'certificate'
+      type: 'certificate',
+      done: false,
+      savelabel: 'Save changes'
     }
   },
   methods: {
@@ -87,6 +90,12 @@ export default {
       var url = Config.BASE_URL + '/userdata'
       fetch(url, opts).then(response => {
         var data = response.json()
+        this.done = true
+        this.savelabel = 'Changes saved'
+        window.setTimeout(() => {
+          this.savelabel = 'Save changes'
+          this.done = false
+        }, 3000)
         console.log(data)
         return data
       }, function (err) {
