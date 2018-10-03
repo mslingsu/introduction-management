@@ -13,6 +13,11 @@ div {
   width: 100%;
   max-width: 1000px; }
 
+.right {
+    float: right;
+    width: 126px;
+    padding: 10px;
+  }
 .md-tabs .md-tabs-navigation {
   background-color: transparent !important;
   -webkit-touch-callout: none;

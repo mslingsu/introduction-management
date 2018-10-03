@@ -39,11 +39,11 @@
       <md-card-header-text style="width: 500px;">
           <md-input-container>
             <label>Name</label>
-            <md-input class="md-title" v-model="summary.name"></md-input>
+            <md-input class="md-title" v-model="summary.name" required></md-input>
           </md-input-container>
           <md-input-container>
-            <label>Heandline</label>
-            <md-input class='md-subhead' v-model="summary.headline"></md-input>
+            <label>Contact</label>
+            <md-input v-model="summary.contact" required></md-input>
           </md-input-container>
       </md-card-header-text>
 
@@ -52,12 +52,18 @@
         </div>
       </md-card-media>
     </md-card-header>
+    <md-card-content>
+      <md-input-container>
+      <label>Headline</label>
+      <md-textarea v-model="summary.headline"></md-textarea>
+    </md-input-container>
+    </md-card-content>
 
     <md-card-actions>
       <md-button @click='onUpload'>Upload Photo</md-button>
     </md-card-actions>
   </md-card>
-  <md-button class='md-raised md-accent' @click.native='onSave'>
+  <md-button class='md-accent' @click.native='onSave'>
       <md-icon>save</md-icon>
       Save Changes
     </md-button>
@@ -68,7 +74,7 @@
   <md-card-header>
     <md-card-header-text>
       <div class='md-title'>{{summary.name}}</div>
-      <div class='md-subhead'>{{summary.headline}}</div>
+      <div class='md-subhead'>{{summary.contact}}</div>
     </md-card-header-text>
 
     <md-card-media style="width: 120px;height: 120px;">
@@ -76,6 +82,11 @@
       </div>
     </md-card-media>
   </md-card-header>
+
+  <md-card-content>
+    <p>{{summary.headline}}</p>
+  </md-card-content>
+
   </md-card>
 </div>
 </template>

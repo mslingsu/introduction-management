@@ -1,4 +1,11 @@
 <template>
+  <div>
+    <div v-if="admin" class="right">
+    <md-button class='md-raised md-accent' @click.native='download'>
+        <md-icon>save_alt</md-icon>
+        <md-tooltip md-direction="left">Download CV as word document</md-tooltip>
+      </md-button>
+    </div>
 <md-tabs md-centered>
   <md-tab md-label="Welcome" md-icon="home">
     <landing
@@ -64,7 +71,8 @@
     <academic></academic>
   </md-tab> -->
 </md-tabs>
-</md-tabs>
+
+</div>
 </template>
 <script>
 import landing from './landing'
@@ -144,6 +152,22 @@ export default {
         }
       }).catch(err => {
         console.error(err)
+      })
+    },
+    download () {
+      this.profileid = this.$route.params.uid
+      var querystring = {
+        id: this.profileid
+      }
+      var url = Config.BASE_URL + '/download?' + QueryBuilder.build(querystring)
+      fetch(url).then(response => {
+        return response.json()
+      }).then(data => {
+        if (data.match(/^https/)) {
+          window.location.href = data
+        } else {
+          console.warn('Invalid download URL', data)
+        }
       })
     },
     sortbyorder (arr) {

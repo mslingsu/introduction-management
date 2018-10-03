@@ -3,11 +3,11 @@
   <div v-for='(row, index) in skills' :key='index'>
     <myitem :formtype="type" :data="row"></myitem>
   </div>
-  <md-button class="md-raised md-primary" @click.native="addSkill">
+  <md-button class="md-accent" @click.native="addSkill">
     <md-icon>add</md-icon>
     Add A Skill
   </md-button>
-  <md-button class="md-raised md-accent" @click.native="onSave">
+  <md-button class="md-accent" @click.native="onSave">
     <md-icon>save</md-icon>
     Save Changes
   </md-button>
