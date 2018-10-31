@@ -5,7 +5,7 @@
     </div>
     <md-button class="md-accent" @click.native="addCert">
       <md-icon>add</md-icon>
-      Add certificates
+      Add certificate
     </md-button>
     <md-button class="md-accent" @click.native="onSave">
       <md-icon v-if="!done">save</md-icon>
@@ -77,6 +77,7 @@ export default {
         'experiences': this.experiences,
         'education': this.education,
         'certificates': this.certificates,
+        'awards': this.awards,
         'skills': this.skills
       }
       var body = JSON.stringify(payload)
@@ -106,6 +107,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['education', 'skills', 'experiences', 'certificates', 'academic', 'summary', 'admin']
+  props: ['education', 'skills', 'experiences', 'certificates', 'academic', 'summary', 'admin', 'awards']
 }
 </script>

@@ -1,5 +1,15 @@
 <template>
 <md-card md-with-hover>
+  <md-card-content v-if="formtype==='awards'">
+    <md-input-container>
+      <label>Award</label>
+      <md-input class="md-title" v-model="data.award"></md-input>
+    </md-input-container>
+    <md-input-container>
+      <label>Order</label>
+      <md-input type="number" min=0 v-model="data.order"></md-input>
+    </md-input-container>
+  </md-card-content>
   <md-card-content v-if="formtype==='skills'">
     <md-layout md-gutter>
       <md-layout md-flex="30">

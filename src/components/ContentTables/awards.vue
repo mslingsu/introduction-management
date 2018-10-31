@@ -1,11 +1,11 @@
 <template>
   <div v-if="admin">
-    <div v-for='(row, index) in experiences' :key='index'>
+    <div v-for='(row, index) in awards' :key='index'>
       <myitem :formtype="type" :data="row"></myitem>
     </div>
-    <md-button class="md-accent" @click.native="addExperience">
+    <md-button class="md-accent" @click.native="addAward">
       <md-icon>add</md-icon>
-      Add experience
+      Add award
     </md-button>
     <md-button class="md-accent" @click.native="onSave">
       <md-icon v-if="!done">save</md-icon>
@@ -15,25 +15,17 @@
   </div>
 
 <div v-else>
-  <div v-for='(row, index) in experiences' :key='index'>
+  <div v-for='(row, index) in awards' :key='index'>
   <md-card md-with-hover>
     <md-card-header>
-    <div class="md-title">{{row.company}}</div>
-    <div class="md-subhead">
-      {{row.title}} in {{row.depart}}
-      <p>{{row.from}} - {{row.to}}</p>
-      <p>{{row.location}}</p>
-    </div>
+    <div class="md-title">{{row.award}}</div>
   </md-card-header>
-
-  <md-card-content>
-    {{row.dest}}
-  </md-card-content>
 
   </md-card>
 </div>
 </div>
 </template>
+
 <script>
 import Config from '../../config.js'
 import myitem from './_myitem'
@@ -41,29 +33,23 @@ import myitem from './_myitem'
 export default {
   data () {
     return {
-      type: 'experience',
+      type: 'awards',
       done: false,
       savelabel: 'Save changes'
     }
   },
   methods: {
-    addExperience () {
-      var exp = {
-        company: null,
-        title: null,
-        depart: null,
-        from: null,
-        to: null,
-        location: null,
-        dest: null,
+    addAward () {
+      var e = {
+        award: null,
         order: null
       }
-      this.experiences.push(exp)
+      this.awards.push(e)
     },
     remove (item) {
-      var idx = this.experiences.indexOf(item)
+      var idx = this.awards.indexOf(item)
       if (idx > -1) {
-        this.experiences.splice(idx, 1)
+        this.awards.splice(idx, 1)
       }
     },
     onSave () {

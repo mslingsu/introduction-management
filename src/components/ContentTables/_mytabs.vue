@@ -15,6 +15,7 @@
     :experiences="experiences"
     :certificates="certificates"
     :academic="academic"
+    :awards="awards"
     :summary="summary"
     :admin="admin">
     </landing>
@@ -27,6 +28,7 @@
     :experiences="experiences"
     :certificates="certificates"
     :academic="academic"
+    :awards="awards"
     :summary="summary"
     :admin="admin">
   </education>
@@ -39,6 +41,7 @@
     :certificates="certificates"
     :experiences="experiences"
     :academic="academic"
+    :awards="awards"
     :summary="summary"
     :admin="admin">
   </skills>
@@ -51,6 +54,7 @@
     :experiences="experiences"
     :certificates="certificates"
     :academic="academic"
+    :awards="awards"
     :summary="summary"
     :admin="admin">
   </experiences>
@@ -63,9 +67,22 @@
     :experiences="experiences"
     :certificates="certificates"
     :academic="academic"
+    :awards="awards"
     :summary="summary"
     :admin="admin">
   </certificates>
+  </md-tab>
+  <md-tab md-label="AWARDS" md-icon="star">
+    <awards
+    :skills="skills"
+    :education="education"
+    :experiences="experiences"
+    :certificates="certificates"
+    :academic="academic"
+    :awards="awards"
+    :summary="summary"
+    :admin="admin">
+  </awards>
   </md-tab>
 
   <!-- <md-tab md-label="PUBLICATION" md-icon="local_library">
@@ -81,6 +98,7 @@ import skills from './skills'
 import experiences from './experiences'
 import academic from './academic'
 import certificates from './certificates'
+import awards from './awards'
 import education from './education'
 import Config from '../../config.js'
 import QueryBuilder from '../../services/QueryBuildService.js'
@@ -96,6 +114,7 @@ export default {
       experiences: [],
       certificates: [],
       academic: [],
+      awards: [],
       summary: {},
       done: false,
       admin: false
@@ -145,6 +164,7 @@ export default {
           this.experiences = data[0]['experiences'] ? this.sortbyorder(data[0]['experiences']) : []
           this.certificates = data[0]['certificates'] ? this.sortbyorder(data[0]['certificates']) : []
           this.academic = data[0]['academic'] ? this.sortbyorder(data[0]['academic']) : []
+          this.awards = data[0]['awards'] ? this.sortbyorder(data[0]['awards']) : []
           this.summary = data[0]['summary'] ? data[0]['summary'] : {name: '', headline: ''}
           this.experiences.forEach(item => {
             if (item.to === null) {
@@ -169,6 +189,7 @@ export default {
         }, 3000)
         return response.json()
       }).then(data => {
+        debugger
         if (data.match(/^https/)) {
           window.location.href = data
         } else {
@@ -197,7 +218,8 @@ export default {
     experiences: experiences,
     academic: academic,
     certificates: certificates,
-    education: education
+    education: education,
+    awards: awards
   }
 }
 </script>

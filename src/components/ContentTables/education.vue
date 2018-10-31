@@ -92,6 +92,7 @@ export default {
         'experiences': this.experiences,
         'education': this.education,
         'certificates': this.certificates,
+        'awards': this.awards,
         'skills': this.skills
       }
       var body = JSON.stringify(payload)
@@ -121,6 +122,6 @@ export default {
   components: {
     myitem: myitem
   },
-  props: ['education', 'skills', 'experiences', 'certificates', 'academic', 'summary', 'admin']
+  props: ['education', 'skills', 'experiences', 'certificates', 'academic', 'summary', 'admin', 'awards']
 }
 </script>
